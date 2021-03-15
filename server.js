@@ -5,6 +5,7 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo')
 var methodOverride = require('method-override')
 const passport = require('./lib/passportConfig')
+const checkStatus = require('./lib/checkStatus')
 
 require('./lib/mongodb')
 
@@ -20,13 +21,18 @@ app.use(session({
 }))
 
 
-// app.use(passport.initialize())
-// app.use(passport.session())
+app.use(passport.initialize())
+app.use(passport.session())
+
+app.use(function(req,res,next){
+    // console.log(req.user)
+    res.locals.currentUser = req.user
+    next()
+})
 
 
-// app.use("/",checkStatus,require)
 app.use("/auth",require('./routes/auth.route'))
-app.use("/",require("./routes/user.route"))
+app.use("/",checkStatus,require("./routes/user.route"))
 
 
 app.listen(process.env.PORT, () => console.log(`running on ${process.env.PORT}`))
