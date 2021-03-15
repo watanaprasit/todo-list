@@ -4,7 +4,8 @@ const bcrypt = require('bcrypt')
 
 const userSchema = new Schema ({
     email: { type: String, required: true},
-    password: { type: String, required: true}
+    password: { type: String, required: true},
+    todo: [{type: mongoose.Schema.Types.ObjectId, ref: 'todo'}]
 })
 
 userSchema.pre("save", async function(next){
