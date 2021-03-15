@@ -1,6 +1,6 @@
 <div>
     <h1>Todo List</h1>
-    <% users.forEach(user => { %>
+    <% user.todo.forEach(user => { %>
     <div class="card">
        <div class="card-body">
            <h5 class="card-title"><%= user.title%></h5>
@@ -16,6 +16,9 @@
 
            <%})%>
        </div>
+        <div class="d-grid gap-2 d-md-block mb-3">
+            <button class="btn btn-warning">Completed</button>
+        </div>
     </div>
 </div>
 
