@@ -1,0 +1,21 @@
+<div>
+    <h2>Create Todo</h2>
+    <form method="POST" action=`user/<%=currentUser._id%>/create?_method=PUT` />
+        <div class="form-row mb-3">
+            <input
+                placeholder="Title of Todo"
+                class="form-control" name="title"
+                />
+        </div>
+        <div class="form-row mb-3">
+            <input
+                    placeholder="Todo Description"
+                    class="form-control" name="description"
+            />
+        </div>
+    <div class="d-grid gap-2 d-md-block mb-3">
+        <button class="btn btn-warning">Submit</button>
+    </div>
+    </form>
+
+</div>

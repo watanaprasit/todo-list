@@ -13,27 +13,27 @@ router.get("/user/:id",async(req,res)=>{
         console.log(req.params.id)
         let user = await User.findById(req.params.id)
         console.log("user is",user)
-        res.render("todo/main",user)
+        res.render("todo/main",{user})
     }catch(e){
 
     }
 })
 
 //user creates his/her todolist
-router.get("/user/:id/create",async (req,res)=>{
-    res.render("todo/create")
+router.get("/user/:id/create", (req,res)=>{
+    res.render("todo/create2")
 })
 
 
 router.put("/user/:id/create",async (req,res)=>{
     try{
-        let {title,description,isCompleted } = req.body
-        let tempToDo = {
-            title,
-            description,
-            isCompleted
-        }
-        let user = await User.findByIdAndUpdate(req.params.id,{$push:{todo:tempToDo}})
+        // let {title,description,isCompleted } = req.body
+        console.log(req.body)
+        // let tempToDo = {
+        //     title,
+        //     description,
+        //     isCompleted
+        // }
         res.redirect(`/user/${req.params.id}`)
     }catch(e){
         console.log(e)

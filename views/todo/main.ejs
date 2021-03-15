@@ -1,10 +1,28 @@
 <div>
     <h1>Todo List</h1>
+    <% user.todo.forEach(user => { %>
     <div class="card">
        <div class="card-body">
-           <h5 class="card-title">Input for todo title</h5>
-           <h6 class="card-subtitle">Input for todo items</h6>
-            <button class="btn btn-warning">Button for completed</button>
+           <h5 class="card-title"><%= user.title%></h5>
+           <h6 class="card-subtitle"><%= user.description%></h6>
+           <form method="POST" action="/user/create?_method=PUT">
+               <button
+                       onclick=""
+                       class="btn btn-warning">
+                   Completed
+               </button>
+
+           </form>
+
+           <%})%>
        </div>
+        <div class="d-grid gap-2 d-md-block mb-3">
+            <button class="btn btn-warning">Completed</button>
+        </div>
     </div>
 </div>
+
+<div>
+    <a href="/signin" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Sign Out</a>
+</div>
+
