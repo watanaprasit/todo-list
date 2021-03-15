@@ -5,11 +5,15 @@
        <div class="card-body">
            <h5 class="card-title"><%= user.title%></h5>
            <h6 class="card-subtitle"><%= user.description%></h6>
-            <button
-                onclick=""
-                class="btn btn-warning">
-                Completed
-            </button>
+           <form method="POST" action="/user/create?_method=PUT">
+               <button
+                       onclick=""
+                       class="btn btn-warning">
+                   Completed
+               </button>
+
+           </form>
+
            <%})%>
        </div>
     </div>
