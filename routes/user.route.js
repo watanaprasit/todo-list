@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const User = require('../models/account.model')
+const Todo = require('../models/todo.model')
 
 router.get("/",async(req,res)=>{
     let tempUser = await res.locals.currentUser._id
@@ -11,7 +12,7 @@ router.get("/",async(req,res)=>{
 router.get("/user/:id",async(req,res)=>{
     try{
         console.log(req.params.id)
-        let user = await User.findById(req.params.id)
+        let user = await User.findById(req.params.id).populate("todo")
         console.log("user is",user)
         res.render("todo/main",{user})
     }catch(e){
@@ -27,13 +28,20 @@ router.get("/user/:id/create", (req,res)=>{
 
 router.put("/user/:id/create",async (req,res)=>{
     try{
-        // let {title,description,isCompleted } = req.body
-        console.log(req.body)
-        // let tempToDo = {
-        //     title,
-        //     description,
-        //     isCompleted
-        // }
+        let {title,description} = req.body
+        // console.log(req.body)
+        let tempToDo = {
+            title,
+            description,
+            isCompleted:false
+        }
+        let todo = new Todo(tempToDo)
+        await todo.save()
+
+        let user = await User.findById(req.params.id)
+        user.todo.push(todo)
+
+        await user.save()
         res.redirect(`/user/${req.params.id}`)
     }catch(e){
         console.log(e)
