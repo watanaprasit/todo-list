@@ -48,5 +48,20 @@ router.put("/user/:id/create",async (req,res)=>{
     }
 })
 
+router.get("/done", (req,res) => {
+    res.render("todo/done")
+})
+
+router.delete("/user/:id/delete", async(req,res) => {
+    try{
+        await Todo.findByIdAndDelete(req.params.id, req.body)
+        res.redirect(`/user/${req.params.id}`)
+    } catch (err) {
+        res.status(403).send({message: 'Forbidden' })
+    }
+})
+
+
+
 
 module.exports = router
